@@ -50,7 +50,7 @@ body {
 .product-category {
   margin: 0 0 6px;
   font-size: 14px;
-  color: #777;
+  color: gray;
 }
 
 .product-name {
@@ -61,6 +61,6 @@ body {
 .product-price {
   margin: 0;
   font-size: 15px;
-  color: #c05a2b;
+  color: red;
   font-weight: bold;
 }
