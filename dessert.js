@@ -1,8 +1,13 @@
-const state = { 
+const state = {
+  product: [
+    {
+      category: "",
+      image: "",
+      price: 0,
+      name: "",
+      id: 1,
+    },
+  ],
+};
 
-  name: 
-  category: 
-  image: 
-  price: 
-  id: 
-}
+//lista proizvoda
