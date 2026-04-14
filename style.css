@@ -66,4 +66,7 @@ body {
 }
 
 .cartItems {
+  font-weight: 600;
+  font-size: larger;
+  color: rgb(131, 13, 13);
 }
