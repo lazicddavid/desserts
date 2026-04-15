@@ -70,3 +70,40 @@ body {
   font-size: larger;
   color: rgb(131, 13, 13);
 }
+
+.cart-section {
+  width: 350px;
+  background-color: #f5f5f5;
+  border-radius: 12px;
+  padding: 32px 24px;
+}
+
+.cart-title {
+  font-size: 32px;
+  color: #b84a1b;
+  margin-bottom: 60px;
+}
+
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.empty-cart-image {
+  width: 180px;
+  height: 140px;
+  margin-bottom: 30px;
+}
+
+.empty-cart-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.empty-cart-text {
+  font-size: 18px;
+  color: #8a5a44;
+}
