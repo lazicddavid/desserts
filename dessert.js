@@ -39,12 +39,14 @@ function renderCart() {
   }
 
   let totalItems = 0;
+  let totalPrice = 0;
 
   cart.forEach(function (item) {
     totalItems += item.quantity;
 
     const div = document.createElement("div");
-    div.textContent = item.name + " x" + item.quantity + " - $" + item.price;
+    div.textContent =
+      item.name + " x" + item.quantity + " - $" + item.price * item.quantity;
 
     DOM.cartContainer.appendChild(div);
   });
