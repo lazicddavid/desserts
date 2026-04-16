@@ -2,24 +2,8 @@ const DOM = {
   cartContainer: document.querySelector(".empty-cart"),
   cartTitle: document.querySelector(".cart-title"),
 };
-
 const state = {
-  products: [
-    {
-      category: "cake",
-      image: "image1.jpg",
-      price: 10,
-      name: "Chocolate Cake",
-      id: 1,
-    },
-    {
-      category: "pie",
-      image: "image2.jpg",
-      price: 15,
-      name: "Apple Pie",
-      id: 2,
-    },
-  ],
+  products: products,
   cart: [],
 };
 
