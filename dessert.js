@@ -48,19 +48,15 @@ function renderCart() {
 function addToCart(id) {
   const cart = getCart();
 
-  let productIndex = -1;
-
-  cart.forEach(function (item, index) {
-    if (item.id === id) {
-      productIndex = index;
-    }
+  const item = cart.find(function (item) {
+    return item.id === id;
   });
 
-  if (productIndex !== -1) {
-    cart[productIndex].quantity += 1;
+  if (item) {
+    item.quantity++;
   } else {
-    const product = state.products.find(function (p) {
-      return p.id === id;
+    const product = state.products.find(function (product) {
+      return product.id === id;
     });
 
     cart.push({
@@ -89,6 +85,7 @@ function removeFromCart(id) {
 
   renderCart();
 }
+
 function updateProductButtons() {
   DOM.productButtons.forEach(function (btn) {
     const id = Number(btn.dataset.id);
