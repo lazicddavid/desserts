@@ -37,7 +37,7 @@ body {
   margin-bottom: 12px;
 }
 
-.add-to-cart-btn {
+.add-btn {
   width: 160px;
   padding: 10px;
   margin: 0 auto 14px;
@@ -106,4 +106,12 @@ body {
 .empty-cart-text {
   font-size: 18px;
   color: #8a5a44;
+}
+
+.empty-cart-image {
+  width: 180px;
+  height: 140px;
+  margin-bottom: 30px;
+  background-color: #e7d8d2;
+  border-radius: 10px;
 }

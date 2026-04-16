@@ -1,22 +1,87 @@
+const DOM = {
+  cartContainer: document.querySelector(".empty-cart"),
+  cartTitle: document.querySelector(".cart-title"),
+};
+
 const state = {
   products: [
     {
-      category: "",
-      image: "",
-      price: 0,
-      name: "",
+      category: "cake",
+      image: "image1.jpg",
+      price: 10,
+      name: "Chocolate Cake",
       id: 1,
     },
+    {
+      category: "pie",
+      image: "image2.jpg",
+      price: 15,
+      name: "Apple Pie",
+      id: 2,
+    },
   ],
-  cartItem: [],
+  cart: [],
 };
 
-//lista svih proizvoda koji su prikazani
+function getCart() {
+  return state.cart;
+}
 
-//lista proizvoda koji su dodati u korpu, addedItems, lista
+function renderCart() {
+  const cart = getCart();
 
-//kolicina jednog priozvoda, - +
+  DOM.cartContainer.innerHTML = "";
 
-//add to card. Proveram da li je proizvod vec dodat
+  if (cart.length === 0) {
+    DOM.cartContainer.innerHTML = "<p>Your added items will appear here</p>";
+    DOM.cartTitle.textContent = "Your Cart (0)";
+    return;
+  }
 
-//dodavanjem kolicine dodaje se jedan isti proizvod, broj istog proizvoda se povecava
+  let totalItems = 0;
+
+  cart.forEach(function (item) {
+    totalItems += item.quantity;
+
+    const div = document.createElement("div");
+    div.textContent = item.name + " x" + item.quantity + " - $" + item.price;
+
+    DOM.cartContainer.appendChild(div);
+  });
+
+  DOM.cartTitle.textContent = "Your Cart (" + totalItems + ")";
+}
+
+function addToCart(id) {
+  const cart = getCart();
+
+  const existing = cart.find(function (item) {
+    return item.id === id;
+  });
+
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    const product = state.products.find(function (p) {
+      return p.id === id;
+    });
+
+    cart.push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+    });
+  }
+
+  renderCart();
+}
+
+const addButtons = document.querySelectorAll(".add-btn");
+
+addButtons.forEach(function (btn) {
+  btn.addEventListener("click", function (e) {
+    const id = Number(e.target.dataset.id);
+    addToCart(id);
+  });
+});
