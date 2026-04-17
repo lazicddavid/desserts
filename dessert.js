@@ -15,6 +15,14 @@ function getCart() {
   return state.cart;
 }
 
+function getProducts() {
+  return state.products;
+}
+
+function setCart(value) {
+  state.cart = value;
+}
+
 function renderCart() {
   const cart = getCart();
 
@@ -55,7 +63,7 @@ function addToCart(id) {
   if (item) {
     item.quantity++;
   } else {
-    const product = state.products.find(function (product) {
+    const product = getProducts().find(function (product) {
       return product.id === id;
     });
 
@@ -79,9 +87,11 @@ function removeFromCart(id) {
     }
   });
 
-  state.cart = cart.filter(function (item) {
-    return item.quantity > 0;
-  });
+  setCart(
+    cart.filter(function (item) {
+      return item.quantity > 0;
+    }),
+  );
 
   renderCart();
 }
@@ -121,7 +131,6 @@ function addButtonListeners() {
 
   plusBtns.forEach(function (btn) {
     btn.addEventListener("click", function (e) {
-      e.stopPropagation();
       const id = Number(e.target.dataset.id);
       addToCart(id);
     });
@@ -129,7 +138,6 @@ function addButtonListeners() {
 
   minusBtns.forEach(function (btn) {
     btn.addEventListener("click", function (e) {
-      e.stopPropagation();
       const id = Number(e.target.dataset.id);
       removeFromCart(id);
     });
@@ -137,7 +145,10 @@ function addButtonListeners() {
 }
 
 DOM.productButtons.forEach(function (btn) {
-  btn.addEventListener("click", function () {
+  btn.addEventListener("click", function (e) {
+    if (e.target.classList.contains("plus")) return;
+    if (e.target.classList.contains("minus")) return;
+
     const id = Number(btn.dataset.id);
     addToCart(id);
   });
