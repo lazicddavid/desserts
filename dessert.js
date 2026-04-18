@@ -77,7 +77,7 @@ function addToCart(id) {
 
   renderCart();
 }
-
+//odvojiti funkcije
 function removeFromCart(id) {
   const cart = getCart();
 
@@ -103,12 +103,12 @@ function updateProductButtons() {
 
     let quantity = 0;
 
-    cart.forEach(function (item) {
+    /* cart.forEach(function (item) {
       if (item.id === id) {
         quantity = item.quantity;
       }
     });
-
+*/
     if (quantity === 0) {
       btn.classList.remove("active");
       btn.innerHTML = `<span>Add to Cart</span>`;
