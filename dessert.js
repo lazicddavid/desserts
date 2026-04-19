@@ -113,6 +113,17 @@ function decreaseQuantity(cart. id) {
   });
 }
 
+
+function  removeFromcart(id) {
+  let cart = getCart();
+
+  cart = decreaseQuantity(cart, id);
+  cart = removeItems(cart);
+  
+  setCart(cart)
+  renderCart()
+}
+
 const numbers = [1, 2, 3];
 
 const result = number.map(function (number) {
