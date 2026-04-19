@@ -97,14 +97,21 @@ function removeFromCart(id) {
   renderCart();
 }*/
 
-function decreaseQuantity(cart. id)
-    {
+function decreaseQuantity(cart. id) {
+   cart.forEach(function (item) {
+    if (item.id === id) {
+      item.quantity--''
+    }
+     });
 
- }  
+ return cart;
+    }
 
- 
-
-
+ funtion removeItems(cart) {
+  return cart.filter(function (item){
+    return item.quantity > 0;
+  });
+}
 
 const numbers = [1, 2, 3];
 
