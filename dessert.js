@@ -77,7 +77,8 @@ function addToCart(id) {
 
   renderCart();
 }
-//odvojiti funkcije
+//odvojiti funkcije 
+/*
 function removeFromCart(id) {
   const cart = getCart();
 
@@ -94,7 +95,24 @@ function removeFromCart(id) {
   );
 
   renderCart();
-}
+}*/
+
+function decreaseQuantity(cart. id)
+    {
+
+ }  
+
+ 
+
+
+
+const numbers = [1, 2, 3];
+
+const result = number.map(function (number) {
+  return number * 2;
+});
+
+console.log(result);
 
 function updateProductButtons() {
   DOM.productButtons.forEach(function (btn) {
