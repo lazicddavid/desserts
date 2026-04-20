@@ -9,6 +9,8 @@ const DOM = {
 const state = {
   products: products,
   cart: [],
+    totalItems: 0,
+  totalPrice: 0,
 
 
  getCart() {
@@ -35,14 +37,11 @@ function renderCart() {
     return;
   }
 
-  let totalItems = 0;
-  let totalPrice = 0;
-
   cart.forEach(function (item) {
     totalItems += item.quantity;
     totalPrice += item.price * item.quantity;
 
-    div.innerHTML = `${item.name} x${item.quantity} - $${item.price * item.quantity}`;gi
+    DOM.cartcontainer.innerHTML = `${item.name} x${item.quantity} - $${item.price * item.quantity}`;
 
     DOM.cartContainer.appendChild(div);
   });
