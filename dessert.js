@@ -9,18 +9,18 @@ const DOM = {
 const state = {
   products: products,
   cart: [],
-};
 
-function getCart() {
-  return state.cart;
+
+ getCart() {
+  return this.cart;
 }
 
-function getProducts() {
-  return state.products;
+getProducts() {
+  return this.products;
 }
-
-function setCart(value) {
-  state.cart = value;
+ setCart(value) {
+  this.cart = value;
+ }
 }
 
 function renderCart() {
@@ -42,9 +42,7 @@ function renderCart() {
     totalItems += item.quantity;
     totalPrice += item.price * item.quantity;
 
-    const div = document.createElement("div");
-    div.textContent =
-      item.name + " x" + item.quantity + " - $" + item.price * item.quantity;
+    div.innerHTML = `${item.name} x${item.quantity} - $${item.price * item.quantity}`;gi
 
     DOM.cartContainer.appendChild(div);
   });
@@ -124,13 +122,7 @@ function  removeFromcart(id) {
   renderCart()
 }
 
-const numbers = [1, 2, 3];
 
-const result = number.map(function (number) {
-  return number * 2;
-});
-
-console.log(result);
 
 function updateProductButtons() {
   DOM.productButtons.forEach(function (btn) {
