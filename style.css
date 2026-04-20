@@ -123,3 +123,40 @@ body {
 .add-btn span {
   margin: 0 10px;
 }
+
+.cart-section {
+  width: 320px;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: #f8a891be;
+}
+
+.cart-title {
+  margin: 0 0 20px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #260f08;
+}
+
+.empty-cart {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.empty-cart p {
+  margin: 0;
+  text-align: center;
+  color: #87635a;
+}
+
+.empty-cart div {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f3d9d2;
+  border-radius: 12px;
+  background-color: white;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #260f08;
+}

@@ -9,145 +9,87 @@ const DOM = {
 const state = {
   products: products,
   cart: [],
-    totalItems: 0,
+  totalItems: 0,
   totalPrice: 0,
 
+  getCart() {
+    return this.cart;
+  },
 
- getCart() {
-  return this.cart;
-}
+  getProducts() {
+    return this.products;
+  },
 
-getProducts() {
-  return this.products;
-}
- setCart(value) {
-  this.cart = value;
- }
- 
+  setCart(value) {
+    this.cart = value;
+  },
 
-getTotalItems() {
-  return this.totalItems;
-}
+  getTotalItems() {
+    return this.totalItems;
+  },
 
+  getTotalPrice() {
+    return this.totalPrice;
+  },
 
- getTotalPrice() {
- 
- return this.totalPrice = value;
- }
+  setTotalItems(value) {
+    this.totalItems = value;
+  },
 
-}
+  setTotalPrice(value) {
+    this.totalPrice = value;
+  },
+};
 
 function renderCart() {
-  const cart = getCart();
+  const cart = state.getCart();
 
   DOM.cartContainer.innerHTML = "";
 
   if (cart.length === 0) {
     DOM.cartContainer.innerHTML = "<p>Your added items will appear here</p>";
     DOM.cartTitle.textContent = "Your Cart (0)";
+    state.setTotalItems(0);
+    state.setTotalPrice(0);
     updateProductButtons();
     return;
   }
+
+  let totalItems = 0;
+  let totalPrice = 0;
 
   cart.forEach(function (item) {
     totalItems += item.quantity;
     totalPrice += item.price * item.quantity;
 
-    DOM.cartcontainer.innerHTML = `${item.name} x${item.quantity} - $${item.price * item.quantity}`;
+    const div = document.createElement("div");
+    div.textContent =
+      item.name + " x" + item.quantity + " - $" + item.price * item.quantity;
 
     DOM.cartContainer.appendChild(div);
   });
+
+  state.setTotalItems(totalItems);
+  state.setTotalPrice(totalPrice);
 
   DOM.cartTitle.textContent = "Your Cart (" + totalItems + ")";
   updateProductButtons();
 }
 
-function addToCart(id) {
-  const cart = getCart();
-
-  const item = cart.find(function (item) {
-    return item.id === id;
-  });
-
-  if (item) {
-    item.quantity++;
-  } else {
-    const product = getProducts().find(function (product) {
-      return product.id === id;
-    });
-
-    cart.push({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      quantity: 1,
-    });
-  }
-
-  renderCart();
-}
-//odvojiti funkcije 
-/*
-function removeFromCart(id) {
-  const cart = getCart();
-
-  cart.forEach(function (item) {
-    if (item.id === id) {
-      item.quantity--;
-    }
-  });
-
-  setCart(
-    cart.filter(function (item) {
-      return item.quantity > 0;
-    }),
-  );
-
-  renderCart();
-}*/
-
-function decreaseQuantity(cart. id) {
-   cart.forEach(function (item) {
-    if (item.id === id) {
-      item.quantity--''
-    }
-     });
-
- return cart;
-    }
-
- funtion removeItems(cart) {
-  return cart.filter(function (item){
-    return item.quantity > 0;
-  });
-}
-
-
-function  removeFromcart(id) {
-  let cart = getCart();
-
-  cart = decreaseQuantity(cart, id);
-  cart = removeItems(cart);
-  
-  setCart(cart)
-  renderCart()
-}
-
-
-
 function updateProductButtons() {
+  const cart = state.getCart();
+
   DOM.productButtons.forEach(function (btn) {
     const id = Number(btn.dataset.id);
-    const cart = getCart();
 
     let quantity = 0;
 
-    /* cart.forEach(function (item) {
+    cart.forEach(function (item) {
       if (item.id === id) {
         quantity = item.quantity;
       }
     });
-*/
+
     if (quantity === 0) {
       btn.classList.remove("active");
       btn.innerHTML = `<span>Add to Cart</span>`;
@@ -160,37 +102,79 @@ function updateProductButtons() {
       `;
     }
   });
-
-  addButtonListeners();
 }
 
-function addButtonListeners() {
-  const plusBtns = document.querySelectorAll(".plus");
-  const minusBtns = document.querySelectorAll(".minus");
+function addToCart(id) {
+  const cart = state.getCart();
 
-  plusBtns.forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
-      const id = Number(e.target.dataset.id);
-      addToCart(id);
-    });
+  const item = cart.find(function (item) {
+    return item.id === id;
   });
 
-  minusBtns.forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
-      const id = Number(e.target.dataset.id);
-      removeFromCart(id);
+  if (item) {
+    item.quantity++;
+  } else {
+    const product = state.getProducts().find(function (product) {
+      return Number(product.id) === id;
     });
+    if (!product) return;
+    cart.push({
+      id: Number(product.id),
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+    });
+  }
+
+  state.setCart(cart);
+  renderCart();
+}
+
+function decreaseQuantity(cart, id) {
+  cart.forEach(function (item) {
+    if (item.id === id) {
+      item.quantity--;
+    }
   });
+
+  return cart;
+}
+
+function removeItems(cart) {
+  return cart.filter(function (item) {
+    return item.quantity > 0;
+  });
+}
+
+function removeFromCart(id) {
+  let cart = state.getCart();
+
+  cart = decreaseQuantity(cart, id);
+  cart = removeItems(cart);
+
+  state.setCart(cart);
+  renderCart();
+}
+
+function handleProductButtonClick(e) {
+  const btn = e.currentTarget;
+  const id = Number(btn.dataset.id);
+
+  if (e.target.closest(".plus")) {
+    addToCart(id);
+    return;
+  }
+
+  if (e.target.closest(".minus")) {
+    removeFromCart(id);
+    return;
+  }
+
+  addToCart(id);
 }
 
 DOM.productButtons.forEach(function (btn) {
-  btn.addEventListener("click", function (e) {
-    if (e.target.classList.contains("plus")) return;
-    if (e.target.classList.contains("minus")) return;
-
-    const id = Number(btn.dataset.id);
-    addToCart(id);
-  });
+  btn.addEventListener("click", handleProductButtonClick);
 });
 
 renderCart();
