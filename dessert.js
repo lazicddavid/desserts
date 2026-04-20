@@ -23,6 +23,18 @@ getProducts() {
  setCart(value) {
   this.cart = value;
  }
+ 
+
+getTotalItems() {
+  return this.totalItems;
+}
+
+
+ getTotalPrice() {
+ 
+ return this.totalPrice = value;
+ }
+
 }
 
 function renderCart() {
