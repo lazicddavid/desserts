@@ -12,6 +12,17 @@ const state = {
   totalItems: 0,
   totalPrice: 0,
 
+  increaseCartItemQuantity(id) {
+    const item = this.cart.find((item) => item.id === id);
+    if (item) {
+      item.quantity++;
+    }
+  },
+
+  addItemToCart(item) {
+    this.cart.push(item);
+  },
+
   getCart() {
     return this.cart;
   },
@@ -129,7 +140,7 @@ function addToCart(id) {
   state.setCart(cart);
   renderCart();
 }
-
+//find f-ja
 function decreaseQuantity(cart, id) {
   cart.forEach(function (item) {
     if (item.id === id) {
