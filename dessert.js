@@ -24,6 +24,8 @@ const state = {
     if (item) {
       item.quantity--;
     }
+
+    this.cart = this.cart.filter((item) => item.quantity > 0);
   },
 
   addItemToCart(item) {
