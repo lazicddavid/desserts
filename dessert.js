@@ -19,6 +19,13 @@ const state = {
     }
   },
 
+  decreaseCartItemQuantity(id) {
+    const item = this.cart.find((item) => item.id === id);
+    if (item) {
+      item.quantity--;
+    }
+  },
+
   addItemToCart(item) {
     this.cart.push(item);
   },
