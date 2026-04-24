@@ -128,3 +128,10 @@ const state = {
     DOM.cartTitle.textContent = "Your Cart (" + this.totalItems + ")";
   },
 };
+
+DOM.productButtons.forEach((btn) => {
+  btn.addEventListener("click", function (e) {
+    const id = Number(e.target.dataset.id);
+    state.addToCart(id);
+  });
+});
