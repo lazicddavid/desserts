@@ -149,7 +149,7 @@ body {
   margin: 0;
   text-align: center;
   color: #87635a;
-  padding: 0;
+  align-self: start;
 }
 
 .empty-cart div {
