@@ -44,4 +44,3 @@ const products = [
 ];
 
 export default products;
-import
