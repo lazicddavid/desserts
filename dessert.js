@@ -5,13 +5,6 @@ const DOM = {
   cartTitle: document.querySelector(".cart-title"),
   productButtons: document.querySelectorAll(".add-btn"),
 };
-import products from "./products.js";
-
-const DOM = {
-  cartContainer: document.querySelector(".empty-cart"),
-  cartTitle: document.querySelector(".cart-title"),
-  productButtons: document.querySelectorAll(".add-btn"),
-};
 
 const state = {
   products: products,
@@ -66,6 +59,24 @@ const state = {
     this.renderCart();
   },
 
+  updateProductButtons() {
+    DOM.productButtons.forEach((btn) => {
+      const id = Number(btn.dataset.id);
+
+      const item = this.cart.find((item) => item.id === id);
+
+      if (item) {
+        btn.innerHTML = `
+        <span class="minus-btn">-</span>
+        <span>${item.quantity}</span>
+        <span class="plus-btn">+</span>
+      `;
+      } else {
+        btn.innerHTML = "Add to Cart";
+      }
+    });
+  },
+
   increaseCartItemQuantity(id) {
     const item = this.cart.find((item) => item.id === id);
 
@@ -114,6 +125,7 @@ const state = {
     if (this.cart.length === 0) {
       DOM.cartContainer.innerHTML = "<p>Your added items will appear here</p>";
       DOM.cartTitle.textContent = "Your Cart (0)";
+      this.updateProductButtons();
       return;
     }
 
@@ -126,12 +138,24 @@ const state = {
     });
 
     DOM.cartTitle.textContent = "Your Cart (" + this.totalItems + ")";
+    this.updateProductButtons();
   },
 };
 
 DOM.productButtons.forEach((btn) => {
   btn.addEventListener("click", function (e) {
-    const id = Number(e.target.dataset.id);
+    const id = Number(btn.dataset.id);
+
+    if (e.target.classList.contains("plus-btn")) {
+      state.increaseCartItemQuantity(id);
+      return;
+    }
+
+    if (e.target.classList.contains("minus-btn")) {
+      state.decreaseCartItemQuantity(id);
+      return;
+    }
+
     state.addToCart(id);
   });
 });
