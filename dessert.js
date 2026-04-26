@@ -141,7 +141,16 @@ renderCartTitle() {
 };
 
 
-rebderCart()
+rebderCart() {
+  this.calculateCartTotals();
+  this.clearCartContainer();
+
+  if (this.cart.leght === 0) {
+    this.renderEmptyCart();
+    this.updateProductButtons;
+    return;
+  }
+}
 
 
 DOM.productButtons.forEach((btn) => {
