@@ -122,10 +122,15 @@ const state = {
   },
 
   renderCart() {
-    this.calculateCartTotals();
+    const = this.calculateCartTotals();
 
+
+
+    clearCartContainer() {
+
+    
     DOM.cartContainer.innerHTML = "";
-
+    }
     if (this.cart.length === 0) {
       DOM.cartContainer.innerHTML = "<p>Your added items will appear here</p>";
       DOM.cartTitle.textContent = "Your Cart (0)";
