@@ -127,13 +127,17 @@ const state = {
     }
 
 
-    renderEmptyCart() {
- 
+    renderEmptyCart() 
+    {
       DOM.cartContainer.innerHTML = "<p>Your added items will appear here</p>";
       DOM.cartTitle.textContent = "Your Cart (0)";
-
-  
     }
+
+
+renderCartItem(item) {
+  const div = document.createElement("div");
+}
+
 
     this.cart.forEach((item) => {
       const div = document.createElement("div");
