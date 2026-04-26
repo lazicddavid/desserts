@@ -150,6 +150,10 @@ rebderCart() {
     this.updateProductButtons;
     return;
   }
+
+  this.renderCartItems();
+  this.renderCartTitle();
+  this.updateProductButtons();
 }
 
 
