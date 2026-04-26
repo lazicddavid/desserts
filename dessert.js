@@ -40,27 +40,9 @@ const state = {
     this.totalPrice = value;
   },
 
-  addToCart(item) {
-    this.cart.push(item);
-  },
-
   addToCart(id) {
     const item = this.cart.find((item) => item.id === id);
 
-    if (item) {
-      item.quantity++;
-    } else {
-      const product = this.products.find((product) => product.id === id);
-
-      this.cart.push({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        quantity: 1,
-      });
-    }
-
-    this.renderCart();
   },
 
   updateProductButtons() {
@@ -134,23 +116,33 @@ const state = {
     }
 
 
-renderCartItem(item) {
-  const div = document.createElement("div");
-}
 
 
-    this.cart.forEach((item) => {
+   renderCartItems(item) {
       const div = document.createElement("div");
       div.textContent =
         item.name + " x" + item.quantity + " - $" + item.price * item.quantity;
 
       DOM.cartContainer.appendChild(div);
-    });
+    },
 
+ 
+renderCartItems() {
+  this.cart.forEach((item) => {
+    this.renderCartItem(item);
+  });
+},
+
+
+renderCartTitle() {
     DOM.cartTitle.textContent = "Your Cart (" + this.totalItems + ")";
-    this.updateProductButtons();
+  
   },
 };
+
+
+rebderCart()
+
 
 DOM.productButtons.forEach((btn) => {
   btn.addEventListener("click", function (e) {
