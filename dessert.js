@@ -40,6 +40,10 @@ const state = {
     this.totalPrice = value;
   },
 
+  addToCart(item) {
+    this.cart.push(item);
+  },
+
   addToCart(id) {
     const item = this.cart.find((item) => item.id === id);
 
@@ -144,14 +148,17 @@ const state = {
 
 DOM.productButtons.forEach((btn) => {
   btn.addEventListener("click", function (e) {
-    const id = Number(btn.dataset.id);
+    const button = e.target.closest(".add-btn");
+    if (!button) return;
 
-    if (e.target.classList.contains("plus-btn")) {
+    const id = Number(button.dataset.id);
+
+    if (e.target.closest(".plus-btn")) {
       state.increaseCartItemQuantity(id);
       return;
     }
 
-    if (e.target.classList.contains("minus-btn")) {
+    if (e.target.closest(".minus-btn")) {
       state.decreaseCartItemQuantity(id);
       return;
     }
