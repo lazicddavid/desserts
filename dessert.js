@@ -58,6 +58,13 @@ const state = {
       });
     }
 
+    this.getCart().push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+    });
+  }gi t
     this.renderCart();
   },
 
