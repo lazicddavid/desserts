@@ -40,10 +40,24 @@ const state = {
     this.totalPrice = value;
   },
 
-  addToCart(id) {
-    const item = this.cart.find((item) => item.id === id);
+addToCart(id) {
+  const item = this.getCart().find((item) => item.id === id);
 
-  },
+  if (item) {
+    item.quantity++;
+  } else {
+    const product = this.getProducts().find((product) => product.id === id);
+
+    this.getCart().push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+    });
+  }
+
+  this.renderCart();
+},
 
   updateProductButtons() {
     DOM.productButtons.forEach((btn) => {
@@ -91,34 +105,34 @@ const state = {
   },
 
   calculateCartTotals() {
-    let totalItems = 0;
-    let totalPrice = 0;
+    const totalPrice = this.getCart().reduce((total, item) => {
+      return total + item.price * item.quantity;
+    }, 0);
 
-    this.cart.forEach((item) => {
-      totalItems += item.quantity;
-      totalPrice += item.price * item.quantity;
-    });
 
-    this.totalItems = totalItems;
-    this.totalPrice = totalPrice;
+
+    const totalItems = this.getCart().reduce((total, item) => { return total + item.quantity;
+    }, 0);
+
+
+  this.setTotalPrice(totalPrice);
+  this.setTotalItems(totalItems);
   },
 
-    clearCartContainer() {
+clearCartContainer() {
+  DOM.cartContainer.innerHTML = "";
+},
 
-    DOM.cartContainer.innerHTML = "";
-    }
-
-
-    renderEmptyCart() 
-    {
+    renderEmptyCart() {
+    
       DOM.cartContainer.innerHTML = "<p>Your added items will appear here</p>";
       DOM.cartTitle.textContent = "Your Cart (0)";
-    }
+    },
 
 
 
 
-   renderCartItems(item) {
+   renderCartItem(item) {
       const div = document.createElement("div");
       div.textContent =
         item.name + " x" + item.quantity + " - $" + item.price * item.quantity;
@@ -128,7 +142,7 @@ const state = {
 
  
 renderCartItems() {
-  this.cart.forEach((item) => {
+  this.getCart().forEach((item) => {
     this.renderCartItem(item);
   });
 },
@@ -138,24 +152,22 @@ renderCartTitle() {
     DOM.cartTitle.textContent = "Your Cart (" + this.totalItems + ")";
   
   },
-};
 
+renderCart() {
+  this.calculateCartTotals(),
+  this.clearCartContainer(),
 
-rebderCart() {
-  this.calculateCartTotals();
-  this.clearCartContainer();
-
-  if (this.cart.leght === 0) {
+  if (this.getCart().length === 0) {
     this.renderEmptyCart();
-    this.updateProductButtons;
+    this.updateProductButtons();
     return;
   }
 
   this.renderCartItems();
   this.renderCartTitle();
   this.updateProductButtons();
-}
-
+},
+};
 
 DOM.productButtons.forEach((btn) => {
   btn.addEventListener("click", function (e) {
