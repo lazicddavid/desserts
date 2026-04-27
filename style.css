@@ -160,3 +160,10 @@ body {
   line-height: 1.5;
   color: #260f08;
 }
+
+.remove-btn {
+  margin-left: 8px;
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+}

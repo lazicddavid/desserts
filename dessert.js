@@ -72,7 +72,7 @@ const state = {
         <span class="minus-btn">-</span>
         <span>${item.quantity}</span>
         <span class="plus-btn">+</span>
-        <span class="remove=btn">Xgi</span>
+        <span class="remove=btn">X</span>
             
           }
         }
@@ -181,6 +181,11 @@ DOM.productButtons.forEach((btn) => {
 
     if (e.target.closest(".minus-btn")) {
       state.decreaseCartItemQuantity(id);
+      return;
+    }
+
+    if (e.target.closest(".remove-btn")) {
+      state.removeFromCart(id);
       return;
     }
 
