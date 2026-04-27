@@ -128,10 +128,9 @@ const state = {
 
   renderCartItem(item) {
     const div = document.createElement("div");
-    div.textContent =
-      item.name + " x" + item.quantity + " - $" + item.price * item.quantity;
+    div.textContent = `${item.name} x${item.quantity} - $${item.price * item.quantity}`;
 
-    DOM.cartContainer.appendChild(div);
+    DOM.cartTitle.textContent = `Your Cart (${this.totalItems})`;
   },
 
   renderCartItems() {
