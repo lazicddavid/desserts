@@ -141,7 +141,7 @@ const state = {
   },
 
   renderCartTitle() {
-    DOM.cartTitle.textContent = `Your Cart (${this.totalItems})`;
+    DOM.cartTitle.textContent = `Your Cart (${this.getTotalItems()})`;
   },
 
   renderCart() {
