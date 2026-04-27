@@ -72,14 +72,16 @@ const state = {
         <span class="minus-btn">-</span>
         <span>${item.quantity}</span>
         <span class="plus-btn">+</span>
+        <span class="remove=btn">Xgi</span>
+            
+          }
+        }
       `;
       } else {
         btn.innerHTML = "Add to Cart";
       }
     });
   },
-
-  //smanjuje kolicinu za 1 , ako kolicina padne na 0 . izbacuje prozivod iz korpe
 
   increaseCartItemQuantity(id) {
     const item = this.getCart().find((item) => item.id === id);
@@ -90,6 +92,8 @@ const state = {
 
     this.renderCart();
   },
+
+  //smanjuje kolicinu za 1 , ako kolicina padne na 0 . izbacuje prozivod iz korpe
 
   decreaseCartItemQuantity(id) {
     const item = this.getCart().find((item) => item.id === id);
