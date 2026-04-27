@@ -40,6 +40,8 @@ const state = {
     this.totalPrice = value;
   },
 
+  //proverava  da li proizvod postoji u korpi, ako postoji, povecava quant, ako ne postoji, pronalazi proizvod u products i dodaje ga u korpu sa quantity 1. na kraju renderuje cart.
+
   addToCart(id) {
     const item = this.getCart().find((item) => item.id === id);
 
