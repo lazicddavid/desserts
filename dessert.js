@@ -65,7 +65,7 @@ const state = {
     DOM.productButtons.forEach((btn) => {
       const id = Number(btn.dataset.id);
 
-      const item = this.cart.find((item) => item.id === id);
+      const item = this.getCart().find((item) => item.id === id);
 
       if (item) {
         btn.innerHTML = `
@@ -82,7 +82,7 @@ const state = {
   //smanjuje kolicinu za 1 , ako kolicina padne na 0 . izbacuje prozivod iz korpe
 
   increaseCartItemQuantity(id) {
-    const item = this.cart.find((item) => item.id === id);
+    const item = this.getCart().find((item) => item.id === id);
 
     if (item) {
       item.quantity++;
@@ -92,19 +92,18 @@ const state = {
   },
 
   decreaseCartItemQuantity(id) {
-    const item = this.cart.find((item) => item.id === id);
+    const item = this.getCart().find((item) => item.id === id);
 
     if (item) {
       item.quantity--;
     }
 
-    this.cart = this.cart.filter((item) => item.quantity > 0);
-
+    this.setCart(this.getCart().filter((item) => item.quantity > 0));
     this.renderCart();
   },
 
   removeFromCart(id) {
-    this.cart = this.cart.filter((item) => item.id !== id);
+    this.setCart(this.getCart().filter((item) => item.id !== id));
     this.renderCart();
   },
 
@@ -130,14 +129,6 @@ const state = {
 
     DOM.cartTitle.textContent = "Your Cart (0)";
   },
-
-
-
-  renderEmptyCart() {
-    DOM.cartContainer.innerHTML = "<p>Your added items will appear here</p>"
-
-    DOM.cartTitle.textContent = "Your cart(0)";gi
-  }
 
   renderCartItem(item) {
     const div = document.createElement("div");
