@@ -67,7 +67,7 @@ const state = {
 
       if (item) {
         btn.innerHTML = `
-        <span class="minugis-btn">-</span>
+        <span class="minus-btn">-</span>
         <span>${item.quantity}</span>
         <span class="plus-btn">+</span>
       `;
@@ -123,6 +123,7 @@ const state = {
 
   renderEmptyCart() {
     DOM.cartContainer.innerHTML = "<p>Your added items will appear here</p>";
+
     DOM.cartTitle.textContent = "Your Cart (0)";
   },
 
@@ -130,7 +131,7 @@ const state = {
     const div = document.createElement("div");
     div.textContent = `${item.name} x${item.quantity} - $${item.price * item.quantity}`;
 
-    DOM.cartTitle.textContent = `Your Cart (${this.totalItems})`;
+    DOM.cartContainer.appendChild(div);
   },
 
   renderCartItems() {
@@ -140,7 +141,7 @@ const state = {
   },
 
   renderCartTitle() {
-    DOM.cartTitle.textContent = "Your Cart (" + this.totalItems + ")";
+    DOM.cartTitle.textContent = `Your Cart (${this.totalItems})`;
   },
 
   renderCart() {
