@@ -58,16 +58,9 @@ const state = {
       });
     }
 
-    this.getCart().push({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      quantity: 1,
-    });
-  }gi t
     this.renderCart();
   },
-
+  //menja izgled tastera, ako je proizvod u korpi, dugme postaje -+quantity,ako nije , vraca text u "add to cart"
   updateProductButtons() {
     DOM.productButtons.forEach((btn) => {
       const id = Number(btn.dataset.id);
@@ -85,6 +78,8 @@ const state = {
       }
     });
   },
+
+  //smanjuje kolicinu za 1 , ako kolicina padne na 0 . izbacuje prozivod iz korpe
 
   increaseCartItemQuantity(id) {
     const item = this.cart.find((item) => item.id === id);
@@ -135,6 +130,14 @@ const state = {
 
     DOM.cartTitle.textContent = "Your Cart (0)";
   },
+
+
+
+  renderEmptyCart() {
+    DOM.cartContainer.innerHTML = "<p>Your added items will appear here</p>"
+
+    DOM.cartTitle.textContent = "Your cart(0)";gi
+  }
 
   renderCartItem(item) {
     const div = document.createElement("div");
