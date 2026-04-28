@@ -33,14 +33,14 @@ const state = {
   },
 
   getTotalPrice() {
-    return this.totalPrice;
+    return this.cart.reduce((total, item) => {
+      return total + item.price * item.quantity;
+    }, 0);
   },
 
   setTotalPrice(value) {
     this.totalPrice = value;
   },
-
-  //proverava  da li proizvod postoji u korpi, ako postoji, povecava quant, ako ne postoji, pronalazi proizvod u products i dodaje ga u korpu sa quantity 1. na kraju renderuje cart.
 
   addToCart(id) {
     const item = this.getCart().find((item) => item.id === id);
@@ -60,7 +60,7 @@ const state = {
 
     this.renderCart();
   },
-  //menja izgled tastera, ako je proizvod u korpi, dugme postaje -+quantity,ako nije , vraca text u "add to cart"
+
   updateProductButtons() {
     DOM.productButtons.forEach((btn) => {
       const id = Number(btn.dataset.id);
@@ -72,10 +72,6 @@ const state = {
         <span class="minus-btn">-</span>
         <span>${item.quantity}</span>
         <span class="plus-btn">+</span>
-        <span class="remove=btn">X</span>
-            
-          }
-        }
       `;
       } else {
         btn.innerHTML = "Add to Cart";
@@ -92,8 +88,6 @@ const state = {
 
     this.renderCart();
   },
-
-  //smanjuje kolicinu za 1 , ako kolicina padne na 0 . izbacuje prozivod iz korpe
 
   decreaseCartItemQuantity(id) {
     const item = this.getCart().find((item) => item.id === id);
@@ -136,8 +130,10 @@ const state = {
 
   renderCartItem(item) {
     const div = document.createElement("div");
-    div.textContent = `${item.name} x${item.quantity} - $${item.price * item.quantity}`;
-
+    div.innerHTML = `
+    <span>${item.name} x${item.quantity} - $${item.price * item.quantity}</span>
+    <button class="remove-cart-item" data-id="${item.id}">x</button>
+  `;
     DOM.cartContainer.appendChild(div);
   },
 
@@ -184,11 +180,13 @@ DOM.productButtons.forEach((btn) => {
       return;
     }
 
-    if (e.target.closest(".remove-btn")) {
-      state.removeFromCart(id);
-      return;
-    }
-
     state.addToCart(id);
   });
+});
+
+DOM.cartContainer.addEventListener("click", function (e) {
+  const button = e.target.closest(".remove-cart-item");
+  if (!button) return;
+  const id = Number(button.dataset.id);
+  state.removeFromCart(id);
 });
