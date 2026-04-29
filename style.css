@@ -164,6 +164,7 @@ body {
 .remove-cart-item {
   margin-left: 8px;
   color: red;
+  background-color: rebeccapurple;
   cursor: pointer;
   font-weight: bold;
 }
