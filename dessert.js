@@ -73,23 +73,6 @@ const state = {
     this.renderCart();
   },
 
-  updateProductButtons() {
-    DOM.productButtons.forEach((btn) => {
-      const id = Number(btn.dataset.id);
-      const item = this.getCartItem(id);
-
-      if (item) {
-        btn.innerHTML = `
-          <span class="minus-btn">-</span>
-          <span>${item.quantity}</span>
-          <span class="plus-btn">+</span>
-        `;
-      } else {
-        btn.innerHTML = "Add to Cart";
-      }
-    });
-  },
-
   clearCartContainer() {
     DOM.cartContainer.innerHTML = "";
   },
@@ -116,6 +99,23 @@ const state = {
 
   renderCartTitle() {
     DOM.cartTitle.textContent = `Your Cart (${this.getTotalItems()})`;
+  },
+
+  updateProductButtons() {
+    DOM.productButtons.forEach((btn) => {
+      const id = Number(btn.dataset.id);
+      const item = this.getCartItem(id);
+
+      if (item) {
+        btn.innerHTML = `
+          <span class="minus-btn">-</span>
+          <span>${item.quantity}</span>
+          <span class="plus-btn">+</span>
+        `;
+      } else {
+        btn.innerHTML = "Add to Cart";
+      }
+    });
   },
 
   renderCart() {
