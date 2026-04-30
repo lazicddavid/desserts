@@ -38,39 +38,40 @@ const state = {
     }, 0);
   },
 
-  addToCart(id) {
-    const cartItem = this.getCartItem(id);
-
-    if (cartItem) {
-      this.increaseQuantity(id);
-    } else {
-      const product = this.getProduct(id);
-      this.cart.push({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        quantity: 1,
-      });
-      this.renderCart();
-    }
+  addToCart(item) {
+    this.cart.push(item);
   },
 
   increaseQuantity(id) {
     const item = this.getCartItem(id);
     if (item) item.quantity++;
-    this.renderCart();
   },
 
   decreaseQuantity(id) {
     const item = this.getCartItem(id);
     if (item) item.quantity--;
     this.cart = this.cart.filter((item) => item.quantity > 0);
-    this.renderCart();
   },
 
   removeFromCart(id) {
     this.cart = this.cart.filter((item) => item.id !== id);
-    this.renderCart();
+  },
+
+  updateProductButtons() {
+    DOM.productButtons.forEach((btn) => {
+      const id = Number(btn.dataset.id);
+      const item = this.getCartItem(id);
+
+      if (item) {
+        btn.innerHTML = `
+          <span class="minus-btn">-</span>
+          <span>${item.quantity}</span>
+          <span class="plus-btn">+</span>
+        `;
+      } else {
+        btn.innerHTML = "Add to Cart";
+      }
+    });
   },
 
   clearCartContainer() {
@@ -101,23 +102,6 @@ const state = {
     DOM.cartTitle.textContent = `Your Cart (${this.getTotalItems()})`;
   },
 
-  updateProductButtons() {
-    DOM.productButtons.forEach((btn) => {
-      const id = Number(btn.dataset.id);
-      const item = this.getCartItem(id);
-
-      if (item) {
-        btn.innerHTML = `
-          <span class="minus-btn">-</span>
-          <span>${item.quantity}</span>
-          <span class="plus-btn">+</span>
-        `;
-      } else {
-        btn.innerHTML = "Add to Cart";
-      }
-    });
-  },
-
   renderCart() {
     this.clearCartContainer();
 
@@ -142,15 +126,31 @@ DOM.productButtons.forEach((btn) => {
 
     if (e.target.closest(".plus-btn")) {
       state.increaseQuantity(id);
+      state.renderCart();
       return;
     }
 
     if (e.target.closest(".minus-btn")) {
       state.decreaseQuantity(id);
+      state.renderCart();
       return;
     }
 
-    state.addToCart(id);
+    const cartItem = state.getCartItem(id);
+
+    if (cartItem) {
+      state.increaseQuantity(id);
+    } else {
+      const product = state.getProduct(id);
+      state.addToCart({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: 1,
+      });
+    }
+
+    state.renderCart();
   });
 });
 
@@ -159,4 +159,5 @@ DOM.cartContainer.addEventListener("click", function (e) {
   if (!button) return;
   const id = Number(button.dataset.id);
   state.removeFromCart(id);
+  state.renderCart();
 });
