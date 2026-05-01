@@ -26,7 +26,7 @@ const state = {
     return this.products.find((product) => product.id === id);
   },
 
-  getTotalItems() {
+  
     return this.cart.reduce((total, item) => {
       return total + item.quantity;
     }, 0);
