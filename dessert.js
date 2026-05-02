@@ -16,7 +16,7 @@ const state = {
 
   getCart() {
     return this.cart;
-  },
+  },gi 
 
   getCartItem(id) {
     return this.cart.find((item) => item.id === id);
