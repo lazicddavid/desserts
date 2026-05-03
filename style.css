@@ -166,4 +166,5 @@ body {
   color: red;
   cursor: pointer;
   font-weight: bold;
+  border: none;
 }
