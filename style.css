@@ -129,6 +129,7 @@ body {
   padding: 24px;
   border-radius: 16px;
   background-color: #f8a891be;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .cart-title {
