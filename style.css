@@ -171,6 +171,7 @@ body {
   cursor: pointer;
   font-weight: bold;
   border: none;
+  border-radius: 50%;
 }
 
 .order-btn {
