@@ -184,3 +184,7 @@ body {
   letter-spacing: 1px;
   transition: background-color 0.3s;
 }
+
+.order-btn:hover {
+  background-color: #a63009;
+}
