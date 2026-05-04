@@ -182,4 +182,5 @@ body {
   color: tan;
   margin-top: 24px;
   letter-spacing: 1px;
+  transition: background-color 0.3s;
 }
