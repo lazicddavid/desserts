@@ -177,22 +177,3 @@ body {
 }
 
 .order-btn {
-  width: 100%;
-  padding: 14px;
-  background-color: #c73b0f;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  color: tan;
-  background color
-  margin-top: 24px;
-  letter-spacing: 1px;
-  transition: background-color 0.3s;
-}
-
-.order-btn:hover {
-  background-color: #a63009;
-}
