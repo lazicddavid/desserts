@@ -188,4 +188,5 @@ body {
   cursor: pointer;
   margin-top: 20px;
   letter-spacing: 0.5px;
+  display: block;
 }
