@@ -191,3 +191,7 @@ body {
   display: block;
   transition: background-color 0.2s;
 }
+
+.order-btn:hover {
+  background-color: #a83208;
+}
