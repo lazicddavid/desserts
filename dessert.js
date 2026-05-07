@@ -58,6 +58,10 @@ const state = {
     this.cart = this.cart.filter((item) => item.id !== id);
   },
 
+  showOrderBtn() {
+    DOM.cartOrderBtn.style.display = this.cart.length > 0 ? "block" : "none";
+  },
+
   updateProductButtons() {
     DOM.productButtons.forEach((btn) => {
       const id = Number(btn.dataset.id);
