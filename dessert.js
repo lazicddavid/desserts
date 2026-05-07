@@ -3,6 +3,7 @@ import products from "./products.js";
 const DOM = {
   cartContainer: document.querySelector(".empty-cart"),
   cartTitle: document.querySelector(".cart-title"),
+  cartOrderBtn: document.querySelector(".order-btn"),
   productButtons: document.querySelectorAll(".add-btn"),
 };
 
