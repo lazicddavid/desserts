@@ -85,6 +85,7 @@ const state = {
 
   renderCartItem(item) {
     const div = document.createElement("div");
+    div.className = "cart-item";
     div.innerHTML = `
       <span>${item.name} x${item.quantity} - $${item.price * item.quantity}</span>
       <button class="remove-cart-item" data-id="${item.id}">x</button>
