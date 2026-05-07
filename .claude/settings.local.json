@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem \"C:\\\\Program Files\", \"C:\\\\Program Files \\(x86\\)\", \"$env:LOCALAPPDATA\\\\Programs\" -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -match \"claude|chatgpt|anthropic|openai\" } | Select-Object FullName)",
+      "PowerShell(Get-ChildItem \"$env:LOCALAPPDATA\\\\Programs\" -Directory | Select-Object Name | Sort-Object Name)",
+      "PowerShell(Get-ChildItem \"$env:LOCALAPPDATA\\\\Programs\" -ErrorAction SilentlyContinue | Select-Object Name; ls \"$env:APPDATA\\\\Programs\" -ErrorAction SilentlyContinue | Select-Object Name; Get-ChildItem \"C:\\\\Program Files\" -ErrorAction SilentlyContinue | Select-Object Name)",
+      "Bash(ls \"C:/Program Files/\" 2>/dev/null | head -30; ls \"C:/Users/lazic/AppData/Local/Programs/\" 2>/dev/null | head -30)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Users/lazic/AppData/Local/Programs/**)",
+      "Bash(ls \"C:/Users/lazic/AppData/Local/Programs/\"; ls \"C:/Users/lazic/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/\" 2>/dev/null | grep -i \"claude\\\\|chatgpt\\\\|anthropic\\\\|openai\" -i; find \"C:/Users/lazic/AppData/Local\" -maxdepth 3 -name \"*.exe\" 2>/dev/null | grep -i \"claude\\\\|chatgpt\" -i | head -20)",
+      "Read(//c/Users/lazic/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/**)",
+      "Read(//c/Users/lazic/AppData/Local/**)",
+      "Read(//c/Users/lazic/**)",
+      "PowerShell(Get-AppxPackage | Where-Object { $_.Name -match \"Claude\" } | Select-Object Name, PackageFamilyName, InstallLocation)",
+      "Bash(xargs ls -la)",
+      "Read(//c/ProgramData/Microsoft/Windows/Start Menu/**)",
+      "PowerShell($shell = New-Object -ComObject Shell.Application; $apps = $shell.NameSpace\\('shell:AppsFolder'\\); $apps.Items\\(\\) | Where-Object { $_.Name -match 'claude|chatgpt' } | Select-Object Name, Path)",
+      "PowerShell($shell = New-Object -ComObject Shell.Application; $apps = $shell.NameSpace\\('shell:AppsFolder'\\); $apps.Items\\(\\) | Select-Object Name, Path | Format-Table -AutoSize | Out-String | Select-String -Pattern \"claude|chatgpt|openai\" -CaseSensitive:$false)"
+    ]
+  }
+}
