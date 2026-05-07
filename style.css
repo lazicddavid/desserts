@@ -170,6 +170,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 12px 0;
+  border-bottom: 1px solid #f3d9d2;
 }
 
 .remove-cart-item {
