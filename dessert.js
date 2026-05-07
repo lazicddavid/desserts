@@ -120,6 +120,7 @@ const state = {
     this.renderCartItems();
     this.renderCartTitle();
     this.updateProductButtons();
+    this.showOrderBtn();
   },
 };
 
