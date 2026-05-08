@@ -4,6 +4,7 @@ const DOM = {
   cartContainer: document.querySelector(".empty-cart"),
   cartTitle: document.querySelector(".cart-title"),
   cartOrderBtn: document.querySelector(".order-btn"),
+  cartCloseAllBtn: document.querySelector(".close-all-btn"),
   productButtons: document.querySelectorAll(".add-btn"),
 };
 
@@ -59,7 +60,13 @@ const state = {
   },
 
   showOrderBtn() {
-    DOM.cartOrderBtn.style.display = this.cart.length > 0 ? "block" : "none";
+    const visible = this.cart.length > 0 ? "block" : "none";
+    DOM.cartOrderBtn.style.display = visible;
+    DOM.cartCloseAllBtn.style.display = visible;
+  },
+
+  clearCart() {
+    this.cart = [];
   },
 
   updateProductButtons() {
@@ -159,6 +166,11 @@ DOM.productButtons.forEach((btn) => {
 
     state.renderCart();
   });
+});
+
+DOM.cartCloseAllBtn.addEventListener("click", function () {
+  state.clearCart();
+  state.renderCart();
 });
 
 DOM.cartContainer.addEventListener("click", function (e) {
