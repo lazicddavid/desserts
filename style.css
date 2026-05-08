@@ -184,6 +184,27 @@ body {
   background-color: transparent;
 }
 
+.close-all-btn {
+  width: 100%;
+  padding: 10px 24px;
+  background-color: transparent;
+  color: #c73b0f;
+  border: 2px solid #c73b0f;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 16px;
+  letter-spacing: 0.5px;
+  display: block;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.close-all-btn:hover {
+  background-color: #c73b0f;
+  color: white;
+}
+
 .order-btn {
   width: 100%;
   padding: 16px 24px;
