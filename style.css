@@ -224,3 +224,18 @@ body {
 .order-btn:hover {
   background-color: #a83208;
 }
+
+.continue-btn {
+  width: 100%;
+  padding: 12px 24px;
+  background-color: transparent;
+  color: #696969;
+  border: 2px solid #696969;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+  letter-spacing: 0.5px;
+  display: block;
+}
