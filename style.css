@@ -238,4 +238,10 @@ body {
   margin-top: 12px;
   letter-spacing: 0.5px;
   display: block;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.continue-btn:hover {
+  background-color: #696969;
+  color: white;
 }
